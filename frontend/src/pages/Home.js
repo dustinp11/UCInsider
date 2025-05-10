@@ -30,7 +30,15 @@ const Home = () => {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
-      <h1>Ask About a Class</h1>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+        <h1 style={{ margin: 0 }}>Ask About a Class</h1>
+        <img
+          src="/images/zot.png"
+          alt="Peter the Anteater"
+          style={{ width: '100px', height: 'auto', marginLeft: '1rem' }}
+        />
+      </div>
+      
       <input
         type="text"
         placeholder="e.g. Is ICS 31 a heavy workload?"
