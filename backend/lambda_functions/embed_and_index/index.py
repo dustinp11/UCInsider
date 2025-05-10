@@ -1,0 +1,1 @@
+# Lambda function for reading from S3, embedding with Bedrock, indexing to OpenSearch

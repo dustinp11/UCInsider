@@ -1,0 +1,1 @@
+// React component that calls the /ask endpoint and shows response

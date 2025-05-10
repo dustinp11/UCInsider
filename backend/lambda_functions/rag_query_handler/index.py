@@ -1,0 +1,1 @@
+# Lambda function to embed query, search OpenSearch, call Claude, return result

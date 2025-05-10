@@ -1,0 +1,1 @@
+// React component to ask a question and display RAG response
