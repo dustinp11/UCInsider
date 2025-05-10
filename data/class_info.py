@@ -29,6 +29,6 @@ def save_class_posts(class_name):
     print(f"Saved {len(result)} posts to {filename}")
 
 if __name__ == "__main__":
-    class_name = input("Enter a class name (e.g., ICS 45C): ")
-    save_class_posts(class_name)
-
+    class_list = ["ICS 45C", "ICS 31", "ICS 6B", "ICS 33"]  # add more
+    for class_name in class_list:
+        save_class_posts(class_name)
