@@ -1,10 +1,11 @@
 import praw
 import json
 from datetime import datetime
+import secrets
 
 reddit = praw.Reddit(
-    client_id="IJEWj8AIguZwYQ-WjE1Zzw",
-    client_secret="EUOh7mopF3kNZNqLCiEU5hdRYIGTcA",
+    client_id=secrets.client_id,
+    client_secret=secrets.client_secret,
     user_agent="uc-insider-script"
 )
 
