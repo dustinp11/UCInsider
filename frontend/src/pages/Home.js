@@ -1,1 +1,59 @@
 // React component to ask a question and display RAG response
+import React, { useState } from 'react';
+
+const Home = () => {
+  const [question, setQuestion] = useState('');
+  const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleAsk = async () => {
+    if (!question.trim()) return;
+    setLoading(true);
+    setResponse('');
+
+    try {
+      const res = await fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question })
+      });
+
+      const data = await res.json();
+      setResponse(data.answer || 'No answer returned.');
+    } catch (err) {
+      console.error(err);
+      setResponse('Something went wrong. Try again later.');
+    }
+
+    setLoading(false);
+  };
+
+  return (
+    <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
+      <h1>Ask About a Class</h1>
+      <input
+        type="text"
+        placeholder="e.g. Is ICS 31 a heavy workload?"
+        value={question}
+        onChange={(e) => setQuestion(e.target.value)}
+        style={{ width: '60%', padding: '0.5rem', fontSize: '1rem' }}
+      />
+      <button
+        onClick={handleAsk}
+        style={{ marginLeft: '1rem', padding: '0.5rem 1rem', fontSize: '1rem' }}
+        disabled={loading}
+      >
+        {loading ? 'Asking...' : 'Ask'}
+      </button>
+
+      {response && (
+        <div style={{ marginTop: '2rem', background: '#f4f4f4', padding: '1rem' }}>
+          <h3>Answer:</h3>
+          <p>{response}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Home;
