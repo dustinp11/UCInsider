@@ -17,8 +17,7 @@ def generate_response(user_query):
     Returns: 
         Nothing
     """
-    boto_session = boto3.Session()
-    aws_region = boto_session.region_name
+    
     bedrock_config = Config(connect_timeout=120, read_timeout=120, retries={'max_attempts': 0})
     bedrock_agent_client = boto3.client(
         'bedrock-agent-runtime', 
@@ -26,8 +25,8 @@ def generate_response(user_query):
         aws_secret_access_key="...",
         region_name='us-west-2',
         config=bedrock_config)
-    preprompt = "Every response you should provide a description of the class first. Then talk about the content of the class. Then give pros and cons of the class and talk about the different professors if available. End with final verdict."
-    final_query = preprompt + " " + user_query 
+    preprompt = "The format of your response should be: 1-2 sentence summary of the sentiment of the course, pros of the course (newline after pro: and then list as bullet points), cons of the course (newline after cons: and then list as bullet points), and a two sentence conclusion."
+    final_query = user_query 
     
     response = bedrock_agent_client.retrieve_and_generate(
         input={
