@@ -1,7 +1,7 @@
 // Utility function to send question to the backend and get a response
 export async function fetchAnswer(question) {
   try {
-    const res = await fetch('/ask', {
+    const res = await fetch('http://localhost:5000/ask', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question }),
