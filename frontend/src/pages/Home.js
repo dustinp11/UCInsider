@@ -1,5 +1,6 @@
 // React component to ask a question and display RAG response
 import React, { useState } from 'react';
+import { fetchAnswer } from '../utils/Ask';
 
 const Home = () => {
   const [question, setQuestion] = useState('');
@@ -11,20 +12,8 @@ const Home = () => {
     setLoading(true);
     setResponse('');
 
-    try {
-      const res = await fetch('/ask', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question })
-      });
-
-      const data = await res.json();
-      setResponse(data.answer || 'No answer returned.');
-    } catch (err) {
-      console.error(err);
-      setResponse('Something went wrong. Try again later.');
-    }
-
+    const answer = await fetchAnswer(question);
+    setResponse(answer);
     setLoading(false);
   };
 
@@ -38,7 +27,7 @@ const Home = () => {
           style={{ width: '100px', height: 'auto', marginLeft: '1rem' }}
         />
       </div>
-      
+
       <input
         type="text"
         placeholder="e.g. Is ICS 31 a heavy workload?"
