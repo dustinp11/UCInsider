@@ -9,10 +9,14 @@ export async function fetchAnswer(question) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question }),
     });
-    const data = await res.json();
-    return data.answer || 'No answer returned.';
+   const json = await res.json();
+
+    if (json.response) {
+      return json;          // return the full object
+    }
+    return { response: json.answer || '', summary: '' };
   } catch (err) {
     console.error('Error fetching answer:', err);
-    return 'Something went wrong.';
+    return { response: '', summary: '' };
   }
 }
