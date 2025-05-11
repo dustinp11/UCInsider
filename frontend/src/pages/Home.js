@@ -55,25 +55,32 @@ const Home = () => {
       </button>
 
       {response && (
-        <div style={{ marginTop: '2rem', background: '#f4f4f4', padding: '1rem' }}>
+        <div style={{ marginTop: '2rem', background: '#f4f4f4', padding: '1rem', whiteSpace: 'pre-wrap', fontFamily: 'Arial' }}>
           <h3>Answer:</h3>
-          <p>{response}</p>
+          {response}
         </div>
       )}
 
       {history.length > 0 && (
-      <div style={{ marginTop: '2rem' }}>
-        <h3>Past Questions:</h3>
-        <ul>
-          {[...history].reverse().map((item, index) => (
-            <li key={index} style={{ marginBottom: '1rem' }}>
-              <strong>Q:</strong> {item.question}<br />
-              <strong>A:</strong> {item.answer}
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
+  <div style={{ marginTop: '2rem', fontFamily: 'Arial' }}>
+    <h3>Past Questions:</h3>
+    <ul>
+      {[...history].reverse().map((item, index) => (
+        <li
+          key={index}
+          style={{
+            marginBottom: '1rem',
+            whiteSpace: 'pre-wrap', // 👈 keeps line breaks
+          }}
+        >
+          <strong>Q:</strong> {item.question}
+          <br />
+          <strong>A:</strong> {item.answer}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
     </div>
   );
 };
