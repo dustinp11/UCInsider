@@ -12,7 +12,7 @@ export async function fetchAnswer(question) {
     const { response, summary } = await res.json();
 
     // Combine into one block
-    return `${response}\n\n\n${summary}`;
+    return `${response}\n\n${summary}`;
   } catch (err) {
     console.error('Error fetching answer:', err);
     return 'Something went wrong.';
