@@ -1,5 +1,13 @@
 // Utility function to send question to the backend and get a response
 export async function fetchAnswer(question) {
+
+    const isProduction = process.env.NODE_ENV === 'production';
+
+  if (isProduction) {
+    // Temporarily return a dummy response instead of calling backend
+    return `This is a placeholder answer for: "${question}" — backend not deployed.`;
+  }
+
   try {
     const res = await fetch('http://localhost:5000/ask', {
       method: 'POST',

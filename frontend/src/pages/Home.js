@@ -70,7 +70,7 @@ const Home = () => {
           key={index}
           style={{
             marginBottom: '1rem',
-            whiteSpace: 'pre-wrap', // 👈 keeps line breaks
+            whiteSpace: 'pre-wrap',
           }}
         >
           <strong>Q:</strong> {item.question}
