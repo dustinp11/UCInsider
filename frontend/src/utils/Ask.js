@@ -9,14 +9,12 @@ export async function fetchAnswer(question) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question }),
     });
-   const json = await res.json();
+    const { response, summary } = await res.json();
 
-    if (json.response) {
-      return json;          // return the full object
-    }
-    return { response: json.answer || '', summary: '' };
+    // Combine into one block
+    return `${response}\n\n\n${summary}`;
   } catch (err) {
     console.error('Error fetching answer:', err);
-    return { response: '', summary: '' };
+    return 'Something went wrong.';
   }
 }
