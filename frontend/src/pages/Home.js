@@ -6,17 +6,23 @@ const Home = () => {
   const [question, setQuestion] = useState('');
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
+  const [history, setHistory] = useState([]);
+
 
   const handleAsk = async () => {
     if (!question.trim()) return;
     setLoading(true);
     setResponse('');
-
+  
     const answer = await fetchAnswer(question);
     setResponse(answer);
+
+    setHistory((prev) => [...prev, { question, answer }]);
+    setQuestion('');
+
     setLoading(false);
   };
-
+  
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
@@ -33,6 +39,11 @@ const Home = () => {
         placeholder="e.g. Is ICS 31 a heavy workload?"
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
+        onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          handleAsk();
+        }
+        }}
         style={{ width: '60%', padding: '0.5rem', fontSize: '1rem' }}
       />
       <button
@@ -49,6 +60,20 @@ const Home = () => {
           <p>{response}</p>
         </div>
       )}
+
+      {history.length > 0 && (
+      <div style={{ marginTop: '2rem' }}>
+        <h3>Past Questions:</h3>
+        <ul>
+          {[...history].reverse().map((item, index) => (
+            <li key={index} style={{ marginBottom: '1rem' }}>
+              <strong>Q:</strong> {item.question}<br />
+              <strong>A:</strong> {item.answer}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
     </div>
   );
 };

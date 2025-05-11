@@ -1,4 +1,3 @@
-// React component that calls the /ask endpoint and shows response
 // Utility function to send question to the backend and get a response
 export async function fetchAnswer(question) {
   try {
