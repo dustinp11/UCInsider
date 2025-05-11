@@ -1,20 +1,14 @@
-// Utility function to send question to the backend and get a response
+// utils/Ask.js
+const LOCAL_URL = 'http://localhost:5000';
+const API_URL = process.env.REACT_APP_API_URL || LOCAL_URL;
+
 export async function fetchAnswer(question) {
-
-    const isProduction = process.env.NODE_ENV === 'production';
-
-  if (isProduction) {
-    // Temporarily return a dummy response instead of calling backend
-    return `This is a placeholder answer for: "${question}" — backend not deployed.`;
-  }
-
   try {
-    const res = await fetch('http://localhost:5000/ask', {
+    const res = await fetch(`${API_URL}/ask`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question }),
     });
-
     const data = await res.json();
     return data.answer || 'No answer returned.';
   } catch (err) {
